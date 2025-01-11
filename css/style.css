@@ -32,9 +32,12 @@
     }
 
 body{
-margin: 0;
-padding: 0;
-font-family: 'PP Neue Montreal Book';
+    margin: 0;
+    padding: 0;
+    font-family: 'PP Neue Montreal Book';
+}
+body:has(.nav_sec.visible){
+    overflow: hidden;
 }
 h1,h2,h3,h4,h5,h6, p, ul, li , a{
     margin: 0;
@@ -43,6 +46,12 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
 }
 .container{
     max-width: 1280px;
+    @media(max-width:1200px){
+        padding: 0 30px;
+        @media(max-width:767px){
+            padding: 0 20px;
+        }
+    }
 }
 .cs_header{
     position: absolute;
@@ -58,9 +67,61 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
     border-radius: 80px;
     padding:15px 33px;
 }
+.hamburger{
+    border:none;
+    background: transparent;
+    width:40px;
+    display: inline-flex;
+    flex-direction: column;
+    gap:8px;
+    display:none;
+    @media (max-width:767px){
+        display:inline-flex;
+    }
+}
+.hamburger span{
+    display: inline-flex;
+    height:2px;
+    width:100%;
+    background: var(--secondary);
+}
+.mobile_header{
+        display:none;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 30px;
+        @media (max-width:767px){
+            display:flex;
+        }
+    }
+    .mobile_header .hamburger svg{
+        width: 24px;
+        height: 24px;
+    }
 .nav_sec{
     display: flex;
     align-items: center;
+    @media (max-width:767px){
+        position: fixed;
+        left: 100%;
+        background: #fff;
+        width:100%;
+        height: 100%;
+        top: 0;
+        z-index: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        padding:50px 30px;
+        transition:0.2s ease-in-out;
+        opacity:0;
+        visibility:hidden;
+    }
+}
+.nav_sec.visible{
+    display:block;
+    left:0;
+    opacity:1;
+    visibility:visible;
 }
 .nav_sec ul{
     display: flex;
@@ -68,14 +129,30 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
     gap: 35px;
     list-style: none;
     padding-right: 40px;
+    @media (max-width:767px){
+        flex-direction:column;
+        align-items:flex-start;
+        padding-bottom:35px;
+    }
 }
 .nav_sec ul li a{
     font-size: 16px;
     color:#393148;
     transition: 0.2s ease-in-out;
 }
+.nav_sec ul li:last-child{
+    display: none;
+    @media (max-width:767px){
+        display:flex;
+    }
+}
 .nav_sec ul li a:hover{
     color:var(--action);
+}
+.nav_sec .primary_btn{
+    @media (max-width:767px){
+        display:none;
+    }
 }
 
 
@@ -86,6 +163,17 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
     background-size: 100%;
     background-position: top;
     padding-top: 156px;
+    @media (max-width:1199px){
+        background-size:cover;
+    }
+    @media (max-width:991px){
+        background-size:cover;
+        padding-top: 190px;
+        padding-bottom: 70px;
+        @media (max-width:767px){
+            padding-bottom:40px;
+        }
+    }
 }
 
 .hero_sec .content_blk{
@@ -103,6 +191,14 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
     color:var(--secondary);
     margin-bottom: 17px;
     font-family: 'PP Neue Montreal Medium';
+    @media (max-width:991px){
+        font-size:64px;
+        max-width:700px;
+        @media (max-width:599px){
+            font-size:44px; 
+        }
+
+    }
 
 }
 .hero_sec .content_blk .blue-text{
@@ -116,7 +212,7 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
    height:21px;
    bottom: -14px;
    left:0;
-   background: url(../images/text_bg.png);
+   background: url(../images/text_bg.png) no-repeat;
    background-size: 100%;
 }
 
@@ -129,6 +225,16 @@ line-height: 150%;
 text-align: center;
 color:var(--secondary);
 margin: auto;
+}
+.hero_sec .row{
+    @media (max-width:767px){
+        display:none;
+    }
+}
+.hero_sec .row .col-md-6:last-child{
+    @media (max-width:991px){
+        display:none;
+    }
 }
 .hero_sec .content_blk .btn_wrap{
    display: flex;
@@ -197,6 +303,9 @@ margin: auto;
     align-items: flex-end;
     gap:10px;
     margin-top: -94px;
+    @media   (min-width:768px) and (max-width:1199px){
+        margin-top:0px; 
+    }
 }
 
 .advisory_sec{
@@ -272,6 +381,8 @@ margin: auto;
         display: flex;
         flex-direction: column;
         gap: 32px;
+        justify-content: space-between;
+        height: 100%;
 }
 
 .funding_sec{
@@ -282,6 +393,7 @@ margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .funding_sec .title_wrap{
@@ -372,15 +484,29 @@ margin: auto;
 .about_sec{
     background: #fff;
     padding: 110px 0;
+    @media (max-width:991px){
+        padding:70px 0;
+    }
+}
+.about_sec .row{
+    @media (max-width:767px){
+        flex-direction:column-reverse;
+        .about_content_wrapper{
+            margin-top:40px;
+        }
+    }
 }
 .about_content_wrapper h3{
-font-style: normal;
-font-weight: 500;
-font-size: 48px;
-line-height: 150%;
-color:var(--secondary);
-margin-bottom: 11px;
-font-family: 'PP Neue Montreal Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 150%;
+    color:var(--secondary);
+    margin-bottom: 11px;
+    font-family: 'PP Neue Montreal Medium';
+    @media (max-width:767px){
+        font-size: 40px; 
+    }
 }
 .about_content_wrapper .desc{
     max-width: 489px;
@@ -390,6 +516,9 @@ font-family: 'PP Neue Montreal Medium';
     line-height: 150%;
     color:var(--primary);
     margin-bottom: 12px;
+    @media (max-width:767px){
+        max-width:100%;
+    }
 }
 .about_content_wrapper .btn_wrap{
     padding-top: 12px;
@@ -416,10 +545,22 @@ font-family: 'PP Neue Montreal Medium';
     margin: auto;
     margin-bottom: 77px;
     font-family: 'PP Neue Montreal Medium';
+    @media (max-width:599px){
+        font-size: 40px; 
+    }
 }
 .roadmap_sec{
     padding:77px 0 105px;
     position: relative;
+    @media (max-width:767px){
+        padding:77px 0 50px;
+        .row{
+            /* flex-direction:column-reverse; */
+            .image_sm{
+                display:none;
+            }
+        }
+    }
 }
 .roadmap_sec:after{
   position: absolute;
@@ -431,6 +572,9 @@ font-family: 'PP Neue Montreal Medium';
   right:0;
   margin: auto;
   background: url(../images/line_bg.png) no-repeat;
+  @media (max-width:767px){
+    display:none;
+  }
 }
 .roadmap_sec .spin_icon{
     position: absolute;
@@ -441,6 +585,9 @@ font-family: 'PP Neue Montreal Medium';
     top:50%;
     transform: translateY(-50%);
     z-index: 1;
+    @media (max-width:767px){
+        display:none;
+    }
 }
 
 .roadmap_one{
@@ -466,12 +613,19 @@ font-family: 'PP Neue Montreal Medium';
 }
 .image_block_wrapper .image_lg{
     padding-right: 60px;
+    @media (max-width:767px){
+        padding-right:0;
+        margin-bottom:24px;
+    }
 }
 .image_block_wrapper .image_lg img{
     aspect-ratio: 523/396;
     max-width:523px;
     border-radius:20px;
     width:100%;
+    @media (max-width:767px){
+        max-width:100%;
+    }
 }
 .image_block_wrapper .image_sm {
 	aspect-ratio: 286/191;
@@ -489,15 +643,29 @@ font-family: 'PP Neue Montreal Medium';
     border-radius:15px;
 }
 
+
 .roadmap_two .row{
     flex-direction:row-reverse;
+  
 }
 .roadmap_two .image_block_wrapper{
     padding-left: 70px;
+    @media (max-width:991px){
+        padding-left:30px;
+    }
+    @media (max-width:767px){
+        padding:0;
+    }
 }
 .roadmap_two .image_block_wrapper .image_lg{
     padding-right:0px;
     padding-left: 60px;
+    @media (max-width:991px){
+        /* padding-left:0; */
+    }
+    @media (max-width:767px){
+        padding:0;
+    }
 }
 .roadmap_two .image_block_wrapper .image_sm{
     margin-right: auto;
@@ -506,13 +674,26 @@ font-family: 'PP Neue Montreal Medium';
 
 .roadmap_two .content_wrapper{
     padding-left: 0;
+     @media (max-width:991px){
+        padding-right:30px;
+     }
+
 }
 
 .content_wrapper{
     padding-left:90px;
+    @media (max-width:991px){
+        padding-left:30px;
+    }
+    @media (max-width:767px){
+        padding:0;
+    }
 }
 .content_wrapper .roadmap_icon{
     margin-bottom: 17px;
+    @media (max-width:767px){
+        display:none;
+    }
 }
 .content_wrapper h4{
 font-style: normal;
@@ -522,6 +703,10 @@ line-height: 130%;
 max-width: 424px;
 color: #09001B;
 margin-bottom: 17px;
+@media (max-width:767px){
+    max-width:100%;
+    font-size: 32px;
+}
 }
 .content_wrapper p{
 max-width: 424px;
@@ -530,6 +715,9 @@ font-size: 16px;
 line-height: 150%;
 color: #393148;
 margin-bottom: 30px;
+@media (max-width:767px){
+    max-width:100%;
+}
 
 }
 
@@ -543,9 +731,16 @@ margin-bottom: 30px;
 }
 .illustration_ui{
     position: relative;
+    @media (max-width:991px){
+        padding-top:70px;
+    }
 }
 .illustration_ui img{
     margin-left: -280px;
+    @media (max-width:991px){
+        margin:0;
+        display:none;
+    }
 }
 .contact_title {
 	position: absolute;
@@ -555,6 +750,13 @@ margin-bottom: 30px;
     max-width: 454px;
     transform: translateY(-50%);
     padding-top: 0;
+    @media (max-width:991px){
+        position: relative;
+        transform:initial;
+        top:initial;
+        margin:auto;
+        text-align:center;
+    }
 }
 .contact_title h5{
     font-style: normal;
@@ -573,7 +775,12 @@ margin-bottom: 30px;
     }
 
 .form_wrapper {
-
+        @media (max-width:991px){
+            max-width:700px;
+            margin:auto;
+            margin-top:50px;
+            padding-bottom:70px;
+        }
 }
 .form_wrapper .form-group {
     margin-bottom: 40px;
@@ -630,10 +837,20 @@ margin-bottom: 30px;
 }
 .footer_navbar_wrap{
     display: flex;
+    @media (max-width:767px){
+        padding-top:40px;
+    }
 }
 .footer_navbar_wrap .social_links{
     min-width:312px;
     margin-left: auto;
+    @media (max-width:1200px) {
+            min-width:auto;
+            width:70%;
+            @media (max-width:767px){
+                max-width:312px; 
+            }
+    }
 }
 .social_links .social_btn{
     margin-bottom: 15px;
