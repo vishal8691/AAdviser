@@ -527,6 +527,9 @@ margin: auto;
 }
 .about_image_wrapper{
     padding-left: 40px;
+    @media (max-width:767px){
+        padding-left:0;
+    }
 }   
 .about_image_wrapper img{
     width:100%;
