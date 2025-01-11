@@ -70,11 +70,12 @@ h1,h2,h3,h4,h5,h6, p, ul, li , a{
 .hamburger{
     border:none;
     background: transparent;
-    width:40px;
+    width:30px;
     display: inline-flex;
     flex-direction: column;
     gap:8px;
     display:none;
+    padding:0;
     @media (max-width:767px){
         display:inline-flex;
     }
